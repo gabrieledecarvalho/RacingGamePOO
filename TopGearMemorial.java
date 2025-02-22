@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,9 @@ import java.awt.event.KeyListener;
 
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
 class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */{
+    
+    // Criando posição da linha
+    private int FaixaEstradaPosicao = 0;
     
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
@@ -31,12 +35,34 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         artesGraficas.setColor(estrada);
 		artesGraficas.fillRect(100, 0, 500, 700);
         
-
         var limiteEstrada = new Color (0Xff0000);
         artesGraficas.setColor(limiteEstrada);
         artesGraficas.fillRect(90, 0,10,700);
         artesGraficas.fillRect(600, 0, 10, 700);
-    }    public static void main(String[] args) {
+        
+        // Criando as faixas da estrada:
+        var listaEstradaCor = new Color (0Xfffff2);
+        if (FaixaEstradaPosicao == 0) {
+            for(int i = 0; i <= 700; i++){
+                artesGraficas.setColor(listaEstradaCor);
+                artesGraficas.fillRect(350, i, 10,70);
+                artesGraficas.fillRect(225, i, 10,70);
+                artesGraficas.fillRect(475, i, 10,70);
+            }
+            FaixaEstradaPosicao = 1;
+        } else if (FaixaEstradaPosicao == 1) {
+            for(int i=50; i<=700; i+=100) {
+                artesGraficas.setColor(listaEstradaCor);
+                artesGraficas.fillRect(350, i, 10,70);
+                artesGraficas.fillRect(225, i, 10,70);
+                artesGraficas.fillRect(475, i, 10,70);
+            }
+            FaixaEstradaPosicao = 0;
+        }
+    }    
+    
+    public static void main(String[] args) {
         TopGearMemorial game = new TopGearMemorial("Top Gear Memorial");
+    
     }
 }
