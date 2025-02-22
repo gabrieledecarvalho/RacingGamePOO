@@ -12,13 +12,16 @@ import java.awt.event.KeyListener;
 class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */{
     
     // Criando posição da linha
-    private int FaixaEstradaPosicao = 0;
-    
+    private int faixaEstradaPosicao = 0;
+    /* pensar se adiciona depois
+    private int gramaPosicao = 0;
+    private int limiteEstradaPosicao = 0;
+     */
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
         // Chamando o constructor do JFrame
         super(title);
-        setBounds(300,10,700,700);
+        setBounds(300,10,1020,700);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
@@ -27,37 +30,43 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     }
     
     public void paint(Graphics artesGraficas) {
-        var grama = new Color (0X136d15);
-        artesGraficas.setColor(grama);
-        artesGraficas.fillRect(0,0,700,700);
         
-        var estrada = new Color (0X355372);
+        var grama1 = new Color (0x0A6906);
+        //var grama2 = new Color (0X008000);
+        
+        artesGraficas.setColor(grama1);
+        artesGraficas.fillRect(0,0,1020,700);
+        
+        var estrada = new Color (0X738595);
+        
         artesGraficas.setColor(estrada);
-		artesGraficas.fillRect(100, 0, 500, 700);
+		artesGraficas.fillRect(255, 0, 510, 700);
         
-        var limiteEstrada = new Color (0Xff0000);
-        artesGraficas.setColor(limiteEstrada);
-        artesGraficas.fillRect(90, 0,10,700);
-        artesGraficas.fillRect(600, 0, 10, 700);
+        var limiteEstrada1 = new Color (0X2138AB);
+        // var limiteEstrada2 = new Color (0XC7C9D5);
+
+        artesGraficas.setColor(limiteEstrada1);
+        artesGraficas.fillRect(215, 0,40,700);
+        artesGraficas.fillRect(765, 0, 40, 700);
         
         // Criando as faixas da estrada:
         var listaEstradaCor = new Color (0Xfffff2);
-        if (FaixaEstradaPosicao == 0) {
+        if (faixaEstradaPosicao == 0) {
             for(int i = 0; i <= 700; i++){
                 artesGraficas.setColor(listaEstradaCor);
-                artesGraficas.fillRect(350, i, 10,70);
-                artesGraficas.fillRect(225, i, 10,70);
-                artesGraficas.fillRect(475, i, 10,70);
+                artesGraficas.fillRect(375, i, 10,70);
+                artesGraficas.fillRect(305, i, 10,70);
+                artesGraficas.fillRect(635, i, 10,70);
             }
-            FaixaEstradaPosicao = 1;
-        } else if (FaixaEstradaPosicao == 1) {
+            faixaEstradaPosicao = 1;
+        } else if (faixaEstradaPosicao == 1) {
             for(int i=50; i<=700; i+=100) {
                 artesGraficas.setColor(listaEstradaCor);
-                artesGraficas.fillRect(350, i, 10,70);
-                artesGraficas.fillRect(225, i, 10,70);
-                artesGraficas.fillRect(475, i, 10,70);
+                artesGraficas.fillRect(375, i, 10,70);
+                artesGraficas.fillRect(505, i, 10,70);
+                artesGraficas.fillRect(635, i, 10,70);
             }
-            FaixaEstradaPosicao = 0;
+            faixaEstradaPosicao = 0;
         }
     }    
     
