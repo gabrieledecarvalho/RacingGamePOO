@@ -13,6 +13,10 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     public TopGearMemorial(String title){
         // Chamando o constructor do JFrame
         super(title);
+        setBounds(300,10,700,700);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(null);
     }
     public static void main(String[] args) {
         TopGearMemorial game = new TopGearMemorial("Top Gear Memorial");
