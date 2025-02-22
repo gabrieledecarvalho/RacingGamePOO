@@ -52,7 +52,7 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         // Criando as faixas da estrada:
         Color listaEstradaCor = new Color (0Xfffff2);
         if (faixaEstradaPosicao == 0) {
-            for(int i = 0; i <= 700; i++){
+            for(int i = 0; i <= 700; i += 100){
                 artesGraficas.setColor(listaEstradaCor);
                 artesGraficas.fillRect(375, i, 10,70);
                 artesGraficas.fillRect(305, i, 10,70);
@@ -74,7 +74,6 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         artesGraficas.fillRect(100, 35, 220, 50);
         artesGraficas.setColor(Color.black);
         artesGraficas.fillRect(105, 40, 210, 40);
-        
         
         // Marcador de velocidade
         artesGraficas.setColor(Color.orange);
