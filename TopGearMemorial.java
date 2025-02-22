@@ -1,4 +1,6 @@
 import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
 class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */{
@@ -17,6 +20,12 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     private int gramaPosicao = 0;
     private int limiteEstradaPosicao = 0;
      */
+
+     private int xPosicaoCarro = 400; // definindo uma posição qualquer por enquanto
+     private int yPosicaoCarro = 700; // Na parte mais baixa em y
+     private ImageIcon carroPlayer;
+
+
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
         // Chamando o constructor do JFrame
@@ -68,6 +77,16 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
             }
             faixaEstradaPosicao = 0;
         }
+
+        // Carregando a imagem do carro jogável, carro do jogador, adicionando um try catch porque é necessário
+        try {
+            carroPlayer = new ImageIcon(ImageIO.read(getClass().getResource("./assets/cars/topGearCar1.png")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+         // Colocando a imagem carregada anteriormente na tela, JFrame
+        carroPlayer.paintIcon(this, artesGraficas, xPosicaoCarro, yPosicaoCarro);
 
         // Marcador de pontos/score
         artesGraficas.setColor(Color.orange);
