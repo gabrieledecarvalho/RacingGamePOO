@@ -31,26 +31,26 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     
     public void paint(Graphics artesGraficas) {
         
-        var grama1 = new Color (0x0A6906);
-        //var grama2 = new Color (0X008000);
+        Color gramaCor1 = new Color (0x0A6906);
+        //var gramaCor2 = new Color (0X008000);
         
-        artesGraficas.setColor(grama1);
+        artesGraficas.setColor(gramaCor1);
         artesGraficas.fillRect(0,0,1020,700);
         
-        var estrada = new Color (0X738595);
+        Color estrada = new Color (0X738595);
         
         artesGraficas.setColor(estrada);
 		artesGraficas.fillRect(255, 0, 510, 700);
         
-        var limiteEstrada1 = new Color (0X2138AB);
-        // var limiteEstrada2 = new Color (0XC7C9D5);
+        Color limiteEstradaCor1 = new Color (0X2138AB);
+        // var limiteEstradaCor2 = new Color (0XC7C9D5);
 
-        artesGraficas.setColor(limiteEstrada1);
+        artesGraficas.setColor(limiteEstradaCor1);
         artesGraficas.fillRect(215, 0,40,700);
         artesGraficas.fillRect(765, 0, 40, 700);
         
         // Criando as faixas da estrada:
-        var listaEstradaCor = new Color (0Xfffff2);
+        Color listaEstradaCor = new Color (0Xfffff2);
         if (faixaEstradaPosicao == 0) {
             for(int i = 0; i <= 700; i++){
                 artesGraficas.setColor(listaEstradaCor);
