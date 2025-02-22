@@ -72,14 +72,20 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         // Marcador de pontos/score
         artesGraficas.setColor(Color.orange);
         artesGraficas.fillRect(100, 35, 220, 50);
-        artesGraficas.setColor(Color.white);
+        artesGraficas.setColor(Color.black);
         artesGraficas.fillRect(105, 40, 210, 40);
+        
         
         // Marcador de velocidade
         artesGraficas.setColor(Color.orange);
         artesGraficas.fillRect(100, 110,220, 50);
-        artesGraficas.setColor(Color.white);
+        artesGraficas.setColor(Color.black);
         artesGraficas.fillRect(105, 115, 210, 40);
+
+        artesGraficas.setColor(Color.ORANGE);
+        artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 30));
+        artesGraficas.drawString("SCORE: " , 120, 70);
+        artesGraficas.drawString("SPEED: ", 120, 145);
     }    
     
     public static void main(String[] args) {
