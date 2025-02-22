@@ -11,6 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import java.util.Random;
+
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
 class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */{
     
@@ -21,10 +23,13 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     private int limiteEstradaPosicao = 0;
      */
 
-     private int xPosicaoCarro = 400; // definindo uma posição qualquer por enquanto
-     private int yPosicaoCarro = 700; // Na parte mais baixa em y
-     private ImageIcon carroPlayer;
+    // CARROS
+    private int xPosicaoCarroPlayer = 400;
+    private int yPosicaoCarroPlayer = 700;
+    // Criando imagem do carro
+    private ImageIcon carroPlayer;
 
+    private ImageIcon carroInimigo1, carroInimigo2, carroInimigo3;
 
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
@@ -78,6 +83,7 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
             faixaEstradaPosicao = 0;
         }
 
+        // CARRO PLAYER JOGÁVEL
         // Carregando a imagem do carro jogável, carro do jogador, adicionando um try catch porque é necessário
         try {
             carroPlayer = new ImageIcon(ImageIO.read(getClass().getResource("./assets/cars/topGearCar1.png")));
@@ -86,8 +92,38 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         }
         
          // Colocando a imagem carregada anteriormente na tela, JFrame
-        carroPlayer.paintIcon(this, artesGraficas, xPosicaoCarro, yPosicaoCarro);
+        carroPlayer.paintIcon(this, artesGraficas, xPosicaoCarroPlayer, yPosicaoCarroPlayer);
 
+        // Posição inicial do carro jogável para ele surgir fora da tela
+        yPosicaoCarroPlayer -= 40;
+		if (yPosicaoCarroPlayer < 500) {
+			yPosicaoCarroPlayer = 500;
+		}
+
+        // CARROS INIMIGOS
+        try {
+            carroInimigo1 = new ImageIcon(ImageIO.read(getClass().getResource("./assets/cars/topGearCar2.png")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            carroInimigo2 = new ImageIcon(ImageIO.read(getClass().getResource("./assets/cars/topGearCar3.png")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            carroInimigo3 = new ImageIcon(ImageIO.read(getClass().getResource("./assets/cars/topGearCar4.png")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        carroInimigo1.paintIcon(this, artesGraficas, 270, yPosicaoCarroPlayer);
+        carroInimigo2.paintIcon(this, artesGraficas, 530, yPosicaoCarroPlayer);
+        carroInimigo3.paintIcon(this, artesGraficas, 660, yPosicaoCarroPlayer);
+
+        // MARCADORES
         // Marcador de pontos/score
         artesGraficas.setColor(Color.orange);
         artesGraficas.fillRect(100, 35, 220, 50);
