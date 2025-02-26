@@ -43,6 +43,8 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 
     private ImageIcon carroInimigo1, carroInimigo2, carroInimigo3;
 
+    private boolean fimDeJogo = false;
+
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
         // Chamando o constructor do JFrame
@@ -141,7 +143,7 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 		y2pos += 50;
 		y3pos += 50;
 
-        // Resetando a posição do carro inimigo para que não saia da tela
+        // Resetando a posição do carro inimigo para que não saia da tela: ToDo: testar essa lógica!!!
         if (y1pos > 700) {
 			carroPosicaoX1 = random.nextInt(5);
 			carroPosicaoY1 = random.nextInt(5);
@@ -198,6 +200,26 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 				carroPosicaoX1++;
 				carroPosicaoX2++;
 			}
+		}
+
+        // Lidando com batida entre os carros. 175 = tamanho da imagem do carro em x
+        if (y1pos < yPosicaoCarroPlayer && y1pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX1] == carroPosicaoX1) {
+			fimDeJogo = true;
+		}
+		if (y2pos < yPosicaoCarroPlayer && y2pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX2] == carroPosicaoX1) {
+			fimDeJogo = true;
+		}
+		if (y3pos < yPosicaoCarroPlayer && y3pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX3] == carroPosicaoX1) {
+			fimDeJogo = true;
+		}
+		if (yPosicaoCarroPlayer < y1pos && yPosicaoCarroPlayer + 175 > y1pos && carroPosicaoX[carroPosicaoX1] == carroPosicaoX1) {
+			fimDeJogo = true;
+		}
+		if (yPosicaoCarroPlayer < y2pos && yPosicaoCarroPlayer + 175 > y2pos && carroPosicaoX[carroPosicaoX2] == carroPosicaoX1) {
+			fimDeJogo = true;
+		}
+		if (yPosicaoCarroPlayer < y3pos && yPosicaoCarroPlayer + 175 > y3pos && carroPosicaoX[carroPosicaoX3] == carroPosicaoX1) {
+			fimDeJogo = true;
 		}
 
         // MARCADORES
