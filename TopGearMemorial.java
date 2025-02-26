@@ -85,15 +85,15 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
         // Criando as faixas da estrada:
         Color listaEstradaCor = new Color (0Xfffff2);
         if (faixaEstradaPosicao == 0) {
-            for(int i = 0; i <= 700; i += 100){
+            for(int i = 0; i <= 700; i += 130){
                 artesGraficas.setColor(listaEstradaCor);
                 artesGraficas.fillRect(375, i, 10,70);
-                artesGraficas.fillRect(305, i, 10,70);
+                artesGraficas.fillRect(505, i, 10,70);
                 artesGraficas.fillRect(635, i, 10,70);
             }
             faixaEstradaPosicao = 1;
         } else if (faixaEstradaPosicao == 1) {
-            for(int i=50; i<=700; i+=100) {
+            for(int i=50; i<=700; i+=130) {
                 artesGraficas.setColor(listaEstradaCor);
                 artesGraficas.fillRect(375, i, 10,70);
                 artesGraficas.fillRect(505, i, 10,70);
