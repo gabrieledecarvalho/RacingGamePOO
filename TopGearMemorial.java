@@ -33,19 +33,23 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     private ImageIcon carroPlayer;
 
     // MOVIMENTAÇÕES
-    // Posição inicial, possíveis
-    private int carroPosicaoX [] = {270, 400, 530, 660};
+    // Posições X, Y possíveis dos carros
+    private int carroPosicaoX [] = { 270, 400, 530, 660 };
     private int carroPosicaoY [] = { -240, -480, -720, -960, -1200 };
 
+    // Definindo um random para utilizar nas posições dos carros inimigos
     Random random = new Random();
-    // Incrementos
+
+    // Incrementos 
     private int carroPosicaoX1 = 0, carroPosicaoX2 = 2, carroPosicaoX3 = 3;
     private int carroPosicaoY1 = random.nextInt(4), carroPosicaoY2 = random.nextInt(4), carroPosicaoY3 = random.nextInt(4);
 
     int y1pos = carroPosicaoY[carroPosicaoY1], y2pos = carroPosicaoY[carroPosicaoY2], y3pos = carroPosicaoY[carroPosicaoY3]; // y position of the car
 
+    // Para as imagens dos carros inimigos
     private ImageIcon carroInimigo1, carroInimigo2, carroInimigo3;
 
+    
     private int score = 0, delay = 100, velocidade = 90;
     private boolean fimDeJogo = false, paint = false;
 
@@ -207,7 +211,7 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
 			}
 		}
 
-        // Lidando com batida entre os carros. 175 = tamanho da imagem do carro em x
+        // Lidando com batida entre os carros. 175 = tamanho da imagem do carro em y
         if (y1pos < yPosicaoCarroPlayer && y1pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX1] == carroPosicaoX1) {
 			fimDeJogo = true;
 		}
@@ -229,21 +233,22 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
 
         // MARCADORES
         // Marcador de pontos/score
-        artesGraficas.setColor(Color.orange);
+        Color marcadores = new Color (0xFF5A36);
+        artesGraficas.setColor(marcadores);
         artesGraficas.fillRect(100, 35, 220, 50);
         artesGraficas.setColor(Color.black);
         artesGraficas.fillRect(105, 40, 210, 40);
         
         // Marcador de velocidade
-        artesGraficas.setColor(Color.orange);
+        artesGraficas.setColor(marcadores);
         artesGraficas.fillRect(100, 110,220, 50);
         artesGraficas.setColor(Color.black);
         artesGraficas.fillRect(105, 115, 210, 40);
 
-        artesGraficas.setColor(Color.ORANGE);
+        artesGraficas.setColor(marcadores);
         artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 30));
         artesGraficas.drawString("SCORE: " + score, 120, 70);
-        artesGraficas.drawString("SPEED: " + velocidade + "Km/h", 120, 145);
+        artesGraficas.drawString(velocidade + "Km/h", 120, 145);
 
         // Incrementando score e speed
         score++;
@@ -259,7 +264,7 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
             }
         }
 
-        // delay
+        // ToDo: Lidando com o delay do jogo
 		try {
 
 			TimeUnit.MILLISECONDS.sleep(delay); // delay the game
@@ -279,17 +284,19 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
 			fimDeJogo = true;
 		}
 
+        Color amarelinhoFonte = new Color (0xFCD917);
+        Color fundoFimDoJogo = new Color (0x9172EC);
         if (fimDeJogo) {
-			artesGraficas.setColor(Color.gray);
-			artesGraficas.fillRect(120, 210, 460, 200);
-			artesGraficas.setColor(Color.DARK_GRAY);
-			artesGraficas.fillRect(130, 220, 440, 180);
+			artesGraficas.setColor(fundoFimDoJogo);
+			artesGraficas.fillRect(100, 210, 820, 200);
+			artesGraficas.setColor(Color.black);
+			artesGraficas.fillRect(110, 220, 800, 180);
 			artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 50));
-			artesGraficas.setColor(Color.red);
-			artesGraficas.drawString("Fim do Jogo!", 210, 270);
-			artesGraficas.setColor(Color.white);
+			artesGraficas.setColor(amarelinhoFonte);
+			artesGraficas.drawString("Fim do Jogo!", 340, 290);
+			artesGraficas.setColor(amarelinhoFonte);
 			artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 30));
-			artesGraficas.drawString("Pressione Enter", 190, 340);
+			artesGraficas.drawString("Pressione Enter", 360, 340);
 			if (!paint) {
 				repaint();
 				paint = true;
