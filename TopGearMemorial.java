@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.Timer; 
-
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
 class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     
