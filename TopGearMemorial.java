@@ -141,6 +141,65 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 		y2pos += 50;
 		y3pos += 50;
 
+        // Resetando a posição do carro inimigo para que não saia da tela
+        if (y1pos > 700) {
+			carroPosicaoX1 = random.nextInt(5);
+			carroPosicaoY1 = random.nextInt(5);
+			y1pos = carroPosicaoY[carroPosicaoY1]; 
+
+		}
+		if (y2pos > 700) {
+			carroPosicaoX2++;
+			if (carroPosicaoX2 > 4) {
+				carroPosicaoX2 = 0;
+			}
+
+			carroPosicaoX2 = random.nextInt(5);
+			carroPosicaoY2 = random.nextInt(5);
+			y2pos = carroPosicaoY[carroPosicaoY2];
+
+		}
+		if (y3pos > 700) {
+			carroPosicaoX3++;
+			if (carroPosicaoX3 > 4) {
+				carroPosicaoX3 = 0;
+			}
+			carroPosicaoX3 = random.nextInt(5);
+			carroPosicaoY3 = random.nextInt(5);
+			y3pos = carroPosicaoY[carroPosicaoY3];
+		}
+
+		if (carroPosicaoX1 == carroPosicaoX2 && carroPosicaoY1 > -100 && carroPosicaoY2 > -100) {
+			carroPosicaoX1 -= 1;
+			if (carroPosicaoX1 < 0) {
+				carroPosicaoX1 += 2;
+			}
+		}
+		if (carroPosicaoX1 == carroPosicaoX3 && carroPosicaoY1 > -100 && carroPosicaoY3 > -100) {
+			carroPosicaoX3 -= 1;
+			if (carroPosicaoX3 < 0) {
+				carroPosicaoX3 += 2;
+			}
+		}
+		if (carroPosicaoX2 == carroPosicaoX3 && carroPosicaoY3 > -100 && carroPosicaoY2 > -100) {
+			carroPosicaoX2 -= 1;
+			if (carroPosicaoX2 < 0) {
+				carroPosicaoX2 += 2;
+			}
+		}
+		if (carroPosicaoX1 < 2 && carroPosicaoX2 < 2 && carroPosicaoX3 < 2) {
+			if (carroPosicaoX1 == 0 && carroPosicaoX2 == 0 && carroPosicaoX3 == 1) {
+				carroPosicaoX3++;
+				carroPosicaoX2++;
+			} else if (carroPosicaoX1 == 0 && carroPosicaoX2 == 1 && carroPosicaoX3 == 0) {
+				carroPosicaoX3++;
+				carroPosicaoX2++;
+			} else if (carroPosicaoX1 == 1 && carroPosicaoX2 == 0 && carroPosicaoX3 == 0) {
+				carroPosicaoX1++;
+				carroPosicaoX2++;
+			}
+		}
+
         // MARCADORES
         // Marcador de pontos/score
         artesGraficas.setColor(Color.orange);
