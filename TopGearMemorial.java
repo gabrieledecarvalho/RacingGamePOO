@@ -21,10 +21,8 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     
     // Criando posição da linha
     private int faixaEstradaPosicao = 0;
-    /* pensar se adiciona depois
     private int gramaPosicao = 0;
     private int limiteEstradaPosicao = 0;
-     */
 
     // CARROS
     private int xPosicaoCarroPlayer = 400;
@@ -69,10 +67,33 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     public void paint(Graphics artesGraficas) {
         
         Color gramaCor1 = new Color (0x0A6906);
-        //var gramaCor2 = new Color (0X008000);
+        Color gramaCor2 = new Color (0X008000);
         
         artesGraficas.setColor(gramaCor1);
         artesGraficas.fillRect(0,0,1020,700);
+
+        if(gramaPosicao == 0) {
+            for (int i = 0; i<700; i += 130){
+                artesGraficas.setColor(gramaCor2);
+                artesGraficas.fillRect(0, i, 1020,70);
+                artesGraficas.fillRect(0, i, 1020,70);
+                artesGraficas.fillRect(0, i, 1020,70);
+            }
+        }
+        
+        if(gramaPosicao == 0) {
+            for (int i = 0; i<700; i += 130){
+                artesGraficas.setColor(gramaCor2);
+                artesGraficas.fillRect(0, i, 1020,70);
+            }
+            gramaPosicao = 1;
+        } else if(gramaPosicao == 1) {
+            for (int i = 50; i<700; i += 130){
+                artesGraficas.setColor(gramaCor2);
+                artesGraficas.fillRect(0, i, 1020,70);
+            }
+            gramaPosicao = 0;
+        }
         
         Color estrada = new Color (0X738595);
         
@@ -80,11 +101,27 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
 		artesGraficas.fillRect(255, 0, 510, 700);
         
         Color limiteEstradaCor1 = new Color (0X2138AB);
-        // var limiteEstradaCor2 = new Color (0XC7C9D5);
+        Color limiteEstradaCor2 = new Color (0XC7C9D5);
 
         artesGraficas.setColor(limiteEstradaCor1);
         artesGraficas.fillRect(215, 0,40,700);
         artesGraficas.fillRect(765, 0, 40, 700);
+
+        if(limiteEstradaPosicao == 0) {
+            for (int i = 0; i<700; i += 130){
+                artesGraficas.setColor(limiteEstradaCor2);
+                artesGraficas.fillRect(215, i, 40,50);
+                artesGraficas.fillRect(765, i, 40,50);
+            }
+            limiteEstradaPosicao = 1;
+        } else if(limiteEstradaPosicao == 1) {
+            for (int i = 50; i<700; i += 130){
+                artesGraficas.setColor(limiteEstradaCor2);
+                artesGraficas.fillRect(215, i, 40,50);
+                artesGraficas.fillRect(765, i, 40,50);
+            }
+            limiteEstradaPosicao = 0;
+        }
         
         // Criando as faixas da estrada:
         Color listaEstradaCor = new Color (0Xfffff2);
