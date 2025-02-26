@@ -12,9 +12,12 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.Timer; 
 
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
-class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */{
+class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     
     // Criando posição da linha
     private int faixaEstradaPosicao = 0;
@@ -36,14 +39,15 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 
     Random random = new Random();
     // Incrementos
-    private int carroPosicaoX1 = 0, carroPosicaoX2 = 2, carroPosicaoX3 = 4;
-    private int carroPosicaoY1 = random.nextInt(5), carroPosicaoY2 = random.nextInt(5), carroPosicaoY3 = random.nextInt(5);
+    private int carroPosicaoX1 = 0, carroPosicaoX2 = 2, carroPosicaoX3 = 3;
+    private int carroPosicaoY1 = random.nextInt(4), carroPosicaoY2 = random.nextInt(4), carroPosicaoY3 = random.nextInt(4);
 
     int y1pos = carroPosicaoY[carroPosicaoY1], y2pos = carroPosicaoY[carroPosicaoY2], y3pos = carroPosicaoY[carroPosicaoY3]; // y position of the car
 
     private ImageIcon carroInimigo1, carroInimigo2, carroInimigo3;
 
-    private boolean fimDeJogo = false;
+    private int score = 0, delay = 100, velocidade = 90;
+    private boolean fimDeJogo = false, paint = false;
 
     // Constructor: iníciando o jogo (janela)
     public TopGearMemorial(String title){
@@ -55,6 +59,7 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
         setLayout(null);
         setFocusable(true);
         setResizable(false);
+        addKeyListener(this);
     }
     
     public void paint(Graphics artesGraficas) {
@@ -145,8 +150,8 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 
         // Resetando a posição do carro inimigo para que não saia da tela: ToDo: testar essa lógica!!!
         if (y1pos > 700) {
-			carroPosicaoX1 = random.nextInt(5);
-			carroPosicaoY1 = random.nextInt(5);
+			carroPosicaoX1 = random.nextInt(4);
+			carroPosicaoY1 = random.nextInt(4);
 			y1pos = carroPosicaoY[carroPosicaoY1]; 
 
 		}
@@ -156,8 +161,8 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 				carroPosicaoX2 = 0;
 			}
 
-			carroPosicaoX2 = random.nextInt(5);
-			carroPosicaoY2 = random.nextInt(5);
+			carroPosicaoX2 = random.nextInt(4);
+			carroPosicaoY2 = random.nextInt(4);
 			y2pos = carroPosicaoY[carroPosicaoY2];
 
 		}
@@ -166,8 +171,8 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 			if (carroPosicaoX3 > 4) {
 				carroPosicaoX3 = 0;
 			}
-			carroPosicaoX3 = random.nextInt(5);
-			carroPosicaoY3 = random.nextInt(5);
+			carroPosicaoX3 = random.nextInt(4);
+			carroPosicaoY3 = random.nextInt(4);
 			y3pos = carroPosicaoY[carroPosicaoY3];
 		}
 
@@ -237,12 +242,124 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
 
         artesGraficas.setColor(Color.ORANGE);
         artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 30));
-        artesGraficas.drawString("SCORE: " , 120, 70);
-        artesGraficas.drawString("SPEED: ", 120, 145);
+        artesGraficas.drawString("SCORE: " + score, 120, 70);
+        artesGraficas.drawString("SPEED: " + velocidade + "Km/h", 120, 145);
+
+        // Incrementando score e speed
+        score++;
+		velocidade++;
+
+        if(velocidade > 140) {
+            velocidade = 240 - delay;
+        }
+        if (score % 50 == 0) {
+            delay -= 10;
+            if (delay < 60) {
+                delay = 60;
+            }
+        }
+
+        // delay
+		try {
+
+			TimeUnit.MILLISECONDS.sleep(delay); // delay the game
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+        if (y1pos < yPosicaoCarroPlayer && y1pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX1] == xPosicaoCarroPlayer) {
+			fimDeJogo = true;
+		}
+		if (y2pos < yPosicaoCarroPlayer && y2pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX2] == xPosicaoCarroPlayer)
+
+		{
+			fimDeJogo = true;
+		}
+		if (y3pos < yPosicaoCarroPlayer && y3pos + 175 > yPosicaoCarroPlayer && carroPosicaoX[carroPosicaoX3] == xPosicaoCarroPlayer) {
+			fimDeJogo = true;
+		}
+
+        if (fimDeJogo) {
+			artesGraficas.setColor(Color.gray);
+			artesGraficas.fillRect(120, 210, 460, 200);
+			artesGraficas.setColor(Color.DARK_GRAY);
+			artesGraficas.fillRect(130, 220, 440, 180);
+			artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 50));
+			artesGraficas.setColor(Color.red);
+			artesGraficas.drawString("Fim do Jogo!", 210, 270);
+			artesGraficas.setColor(Color.white);
+			artesGraficas.setFont(new Font("Monospaced", Font.BOLD, 30));
+			artesGraficas.drawString("Pressione Enter", 190, 340);
+			if (!paint) {
+				repaint();
+				paint = true;
+			}
+		} else {
+			repaint();
+		}
     }    
     
     public static void main(String[] args) {
         TopGearMemorial game = new TopGearMemorial("Top Gear Memorial");
     
     }
+
+    @Override
+	public void keyPressed(KeyEvent e) {
+        // Se a tecla esquerda for pressionada, o carro move para a esquerda
+        if (e.getKeyCode() == KeyEvent.VK_LEFT && !fimDeJogo ) {
+            xPosicaoCarroPlayer -= 130;
+            if(xPosicaoCarroPlayer < 270) {
+                xPosicaoCarroPlayer = 270;
+            }
+        }
+        // Se a tecla direita for pressionada, o carro move para a direita
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT && !fimDeJogo) {
+            xPosicaoCarroPlayer += 130;
+            if(xPosicaoCarroPlayer > 660) {
+                xPosicaoCarroPlayer = 660;
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && fimDeJogo) {
+            fimDeJogo = false;
+			paint = false;
+			carroPosicaoX1 = 0;
+			carroPosicaoX2 = 2;
+			carroPosicaoX3 = 3;
+			carroPosicaoY1 = random.nextInt(4);
+			carroPosicaoY2 = random.nextInt(4);
+			carroPosicaoY3 = random.nextInt(4);
+			y1pos = carroPosicaoY[carroPosicaoY1];
+			y2pos = carroPosicaoY[carroPosicaoY2];
+			y3pos = carroPosicaoY[carroPosicaoY3];
+			velocidade = 90; // Reseta velocidade
+			score = 0; // Reseta Score
+			delay = 100; // delay para 100
+			// Reseta a posição do carro player
+            xPosicaoCarroPlayer = 400;
+			yPosicaoCarroPlayer = 700; 
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent arg0){
+
+    }
+
+    // Aplicando para s e a, não só para seta
+    @Override
+	public void keyTyped(KeyEvent e) {
+		if (e.getKeyChar() == 'a' && !fimDeJogo) {
+			xPosicaoCarroPlayer -= 130;
+
+		}
+		if (e.getKeyChar() == 's' && !fimDeJogo) { 
+			xPosicaoCarroPlayer += 130; 
+		}
+
+		repaint();
+	}
+
+    @Override
+	public void actionPerformed(ActionEvent arg0) {
+	}
 }
