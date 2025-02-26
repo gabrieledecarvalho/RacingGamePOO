@@ -29,6 +29,18 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
     // Criando imagem do carro
     private ImageIcon carroPlayer;
 
+    // MOVIMENTAÇÕES
+    // Posição inicial, possíveis
+    private int carroPosicaoX [] = {270, 400, 530, 660};
+    private int carroPosicaoY [] = { -240, -480, -720, -960, -1200 };
+
+    Random random = new Random();
+    // Incrementos
+    private int carroPosicaoX1 = 0, carroPosicaoX2 = 2, carroPosicaoX3 = 4;
+    private int carroPosicaoY1 = random.nextInt(5), carroPosicaoY2 = random.nextInt(5), carroPosicaoY3 = random.nextInt(5);
+
+    int y1pos = carroPosicaoY[carroPosicaoY1], y2pos = carroPosicaoY[carroPosicaoY2], y3pos = carroPosicaoY[carroPosicaoY3]; // y position of the car
+
     private ImageIcon carroInimigo1, carroInimigo2, carroInimigo3;
 
     // Constructor: iníciando o jogo (janela)
@@ -119,9 +131,15 @@ class TopGearMemorial extends JFrame /*implements KeyListener, ActionListener */
             e.printStackTrace();
         }
 
-        carroInimigo1.paintIcon(this, artesGraficas, 270, yPosicaoCarroPlayer);
-        carroInimigo2.paintIcon(this, artesGraficas, 530, yPosicaoCarroPlayer);
-        carroInimigo3.paintIcon(this, artesGraficas, 660, yPosicaoCarroPlayer);
+        // Defininco a posição dos carros inimigos
+        carroInimigo1.paintIcon(this, artesGraficas, carroPosicaoX[carroPosicaoX1] , y1pos);
+        carroInimigo2.paintIcon(this, artesGraficas, carroPosicaoX[carroPosicaoX2] , y2pos);
+        carroInimigo3.paintIcon(this, artesGraficas, carroPosicaoX[carroPosicaoX3], y3pos);
+
+        // incrementando a posição dos inimigos
+        y1pos += 50;
+		y2pos += 50;
+		y3pos += 50;
 
         // MARCADORES
         // Marcador de pontos/score
