@@ -15,7 +15,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 // Classe herdando do JFrame e (depois) implementando as interfaces KeyListener (para eventos do teclado) e o actionListener para eventos 
-class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
+class RacingGame extends JFrame implements KeyListener, ActionListener {
     
     // Criando posição da linha
     private int faixaEstradaPosicao = 0;
@@ -50,7 +50,7 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     private boolean fimDeJogo = false, paint = false;
 
     // Constructor: iníciando o jogo (janela)
-    public TopGearMemorial(String title){
+    public RacingGame(String title){
         // Chamando o constructor do JFrame
         super(title);
         setBounds(300,10,1020,700);
@@ -342,7 +342,7 @@ class TopGearMemorial extends JFrame implements KeyListener, ActionListener {
     }    
     
     public static void main(String[] args) {
-        TopGearMemorial game = new TopGearMemorial("Top Gear Memorial");
+        RacingGame game = new RacingGame("Top Gear Memorial");
     
     }
 
